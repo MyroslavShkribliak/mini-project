@@ -21,7 +21,7 @@ const MovieInfo = () => {
 
     useEffect(() => {
         if (id) dispatch(movieActions.getMovie(id))
-    }, [id])
+    }, [dispatch, id])
 
     const findGenre = (id) => {
         const genre = genres?.genres?.find(value => value.id === id)
@@ -29,35 +29,35 @@ const MovieInfo = () => {
     }
 
     return (
-        <div className={'movie-container'}>
-            <FontAwesomeIcon className={'back-icon'} icon={faArrowLeft} onClick={() => navigate(-1)}/>
+        <div>
+
+            <FontAwesomeIcon icon={faArrowLeft} onClick={() => navigate(-1)}/>
 
             {movie ?
-                <div className={'movie-wrapper'}>
+                <div>
 
                     <div>
                         <img src={photosImages + movie?.poster_path} alt={movie?.title}/>
                     </div>
-                    <div className={'movie-container_content'}>
+                    <div>
                         <h2>{movie?.original_title}</h2>
 
                         <div>
                             <span>Genre: </span>
                             {
-                                movie?.genres?.map(genre => <span key={genre.id}> {findGenre(genre.id)}</span>)
+                                movie.genres?.map(genre => <span key={genre.id}> {findGenre(genre.id)}</span>)
                             }
                         </div>
-                        <div><p>Released:<span>{movie?.release_date}</span></p></div>
-                        <div><p>Rating: <span>{movie?.vote_average}</span></p></div>
-                        <div><p>Runtime: <span>{movie?.runtime}</span></p></div>
-                        <div><p>Overview: <span>{movie?.overview}</span></p></div>
+                        <div><p>Released{movie?.release_date}</p></div>
+                        <div><p>Rating:{movie?.vote_average}</p></div>
+                        <div><p>Runtime:{movie?.runtime}</p></div>
+                        <div><p>Overview:{movie?.overview}</p></div>
                     </div>
 
                 </div>
                 :
                 <h2>No info</h2>
             }
-
 
 
         </div>

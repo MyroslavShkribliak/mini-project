@@ -1,9 +1,10 @@
-import { Header, MoviesListCard} from "../components";
+import {MoviesListCard} from "../components";
+import {Outlet} from "react-router-dom";
 
 const MoviesPage = () => {
     return (
         <div>
-            <Header/>
+            <Outlet/>
             <MoviesListCard/>
 
         </div>

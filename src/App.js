@@ -1,33 +1,22 @@
-import {useSelector} from "react-redux";
-import {createContext, useState} from "react";
-import {GenreBadge, Header, MovieInfo, MoviesList} from "./components";
 import {Route, Routes} from "react-router-dom";
 
-const ThemeContext = createContext(null)
+import {MovieInfo, PosterPreview} from "./components";
+import {MoviesPage} from "./containers";
+
+
 
 const App = () => {
 
-    const {show} = useSelector(state => state.movieReducer);
-
-    const [theme, setTheme] = useState("light");
-
-    const toggleTheme = () => {
-        setTheme(theme === 'light' ? 'dark' : 'light')
-    }
-
     return (
-        <ThemeContext.Provider value={{theme, toggleTheme}}>
-            <div id={theme}>
-                <Header toggleTheme={toggleTheme}/>
-                {
-                    show ? <GenreBadge/> : null
-                }
-                <Routes>
-                    <Route path={'/'} element={<MoviesList/>}/>
-                    <Route path={'/movie/:id'} element={<MovieInfo/>}/>
-                </Routes>
-            </div>
-        </ThemeContext.Provider>
+        <div>
+            <Routes>
+                    <Route path={'/'} element={<MoviesPage/>}/>
+                    <Route path={'PosterPreview'} element={<PosterPreview/>}>
+                        <Route path={':id'} element={<MovieInfo/>}/>
+                    </Route>
+            </Routes>
+        </div>
+
     );
 };
 

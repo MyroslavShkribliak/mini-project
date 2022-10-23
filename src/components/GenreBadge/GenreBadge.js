@@ -16,25 +16,24 @@ const GenreBadge = () => {
         dispatch(movieActions.getGenrebadge)
     }, [])
 
-    const Submit = (id) => {
+    const handleSubmit = (id) => {
         if (ref.current.checked) {
             dispatch(movieActions.selectGenre(id))
-
         }else dispatch(movieActions.deleteGenre(id))
     }
 
     return (
         <div>
-            <div className={"genre_select"}>
+            <div>
                 {
-                    genres?.genres?.map(genre => <div key={genre.id}>
-                        <label className={"checkbox-el"}>
+                    genres.genres?.map(genre => <div key={genre.id}>
+                        <label>
                             <input
                                 type="checkbox"
                                 value={genre.name}
                                 name={genre.name}
                                 ref={ref}
-                                onClick={() => Submit(genre.id)}
+                                onClick={() => handleSubmit(genre.id)}
                             />
                             {genre.name}
                         </label>
@@ -42,8 +41,8 @@ const GenreBadge = () => {
                 }
 
             </div>
-            <div className={'genre_select_btn'} >
-                <button onClick={() => dispatch(movieActions.show(false))}>Hide</button>
+            <div>
+                <button onClick={() => dispatch(movieActions.show(false))}>Ok</button>
             </div>
         </div>
     )

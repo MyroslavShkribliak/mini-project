@@ -2,23 +2,34 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 import {movieService} from "../../services";
 
-
-
 const initialState = {
     movies: [],
+    movie: null,
     genres: [],
-    currentGenres: [],
-    loading: false,
     page: 1,
+    currentGenres: null,
+    loading: true,
     show: true,
 }
 
-const getMovie = createAsyncThunk(
+const getAllMovie = createAsyncThunk(
     'movieSlice/getAllMovie',
-    async ({page}, {rejectWithValue}) => {
+    async (page, {rejectWithValue}) => {
         try {
             const {data} = await movieService.getAll(page);
-            return data.results;
+            return data;
+        } catch (e) {
+            rejectWithValue(e.response.data)
+        }
+    }
+);
+
+const getMovie = createAsyncThunk(
+    'movieSlice/getMovie',
+    async (id, {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.getMovie(id);
+            return data;
         } catch (e) {
             rejectWithValue(e.response.data)
         }
@@ -38,10 +49,10 @@ const searchMovie = createAsyncThunk(
 );
 
 const getGenrebadge = createAsyncThunk(
-    'movieSlice/getAllGenres',
+    'movieSlice/getGenrebadge',
     async (_, {rejectWithValue}) => {
         try {
-            const {data} = await movieService.getGenres();
+            const {data} = await movieService.getGenrebadge();
             return data;
         } catch (e) {
             rejectWithValue(e.response.data)
@@ -51,15 +62,15 @@ const getGenrebadge = createAsyncThunk(
 
 const searchByGenre = createAsyncThunk(
     'movieSlice/searchByGenre',
-    async (genre, {rejectWithValue}) => {
+    async ({currentGenres}, {rejectWithValue}) => {
         try {
-            const {data} = await movieService.searchByGenre(genre)
+            const {data} = await movieService.searchByGenre(currentGenres)
             return data;
         } catch (e) {
             rejectWithValue(e.response.data)
         }
     }
-)
+);
 
 const movieSlice = createSlice({
     name: 'movieSlice',
@@ -67,36 +78,36 @@ const movieSlice = createSlice({
     reducers: {
         nextPage: (state, action) => {
             if (state.page < 500) state.page += action.payload;
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         },
         prevPage: (state, action) => {
             if (state.page > 1) state.page -= action.payload;
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         },
         show: (state, action) => {
             state.show = action.payload;
         },
         selectGenre: (state, action) => {
+            state.currentGenres = [];
             state.currentGenres.push(action.payload);
         },
+        deleteGenre: (state, action) => {
+            const index = state.currentGenres.findIndex(genre => genre.id === action.payload);
+            state.currentGenres.splice(index, 1)
+        }
     },
     extraReducers: builder =>
         builder
-            .addCase(getMovie.fulfilled, (state, action) => {
+            .addCase(getAllMovie.fulfilled, (state, action) => {
                 state.movies = action.payload;
-                state.loading = false
+                state.loading = false;
             })
-            .addCase(getMovie.pending, (state) => {
+            .addCase(getAllMovie.pending, (state) => {
                 state.loading = true
             })
+            .addCase(getMovie.fulfilled, (state, action) => {
+                state.movie = action.payload;
+            })
             .addCase(searchMovie.fulfilled, (state, action) => {
-                state.movies = action.payload?.results;
+                state.movies = action.payload;
                 state.loading = false
             })
             .addCase(searchMovie.pending, (state) => {
@@ -107,7 +118,7 @@ const movieSlice = createSlice({
                 state.loading = false;
             })
             .addCase(searchByGenre.fulfilled, (state, action) => {
-                state.movies = action.payload.results;
+                state.movies = action.payload;
                 state.loading = false;
             })
             .addCase(searchByGenre.pending, (state) => {
@@ -115,17 +126,19 @@ const movieSlice = createSlice({
             })
 });
 
-const {reducer: movieReducer, actions: {nextPage, prevPage, show,selectGenre}} = movieSlice;
+const {reducer: movieReducer, actions: {nextPage, prevPage, show, selectGenre, deleteGenre}} = movieSlice;
 
 const movieActions = {
-    getMovie,
+    getAllMovie,
     searchMovie,
     getGenrebadge,
     nextPage,
     prevPage,
     show,
     searchByGenre,
-    selectGenre
+    selectGenre,
+    getMovie,
+    deleteGenre
 }
 
 export {
