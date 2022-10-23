@@ -1,2 +1,2 @@
-export * from './auth.service';
+export * from './movieapikey.service';
 export * from './movie.service';
