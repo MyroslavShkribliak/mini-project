@@ -4,7 +4,7 @@ import {ThemeProvider} from "styled-components";
 
 import {MovieInfo, MoviesList} from "./components";
 import {MoviesPage} from "./containers";
-import {darkTheme, GlobalStyles, lightTheme, StyledApp} from "./Theme";
+import {darkTheme, GlobalStyles, lightTheme, StyledApp} from "./theme";
 
 
 const App = () => {

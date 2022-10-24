@@ -1,12 +1,10 @@
 import {useDispatch} from "react-redux";
 import {useEffect} from "react";
 
-
 import {StarsRating} from "../StarsRating/StarsRating";
 import {movieActions} from "../../redux";
 import {photosImages} from "../../configs";
-import css from './movie.module.css'
-// import {Link} from "react-router-dom";
+import css from './movie.module.css';
 
 const MoviesList = ({movie}) => {
     const dispatch = useDispatch();
@@ -18,8 +16,7 @@ const MoviesList = ({movie}) => {
 
         <div className={css.app}>
 
-                <img src={`${photosImages}${movie.poster_path}`} alt={`${movie.title}`}/>
-
+            <img src={`${photosImages}${movie.poster_path}`} alt={`${movie.title}`}/>
             <h2 className={css.title}>{movie?.title}</h2>
             <p>{movie?.overview} </p>
             <div className={css.rating}>

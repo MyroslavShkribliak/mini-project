@@ -8,10 +8,6 @@ import {MoviesList} from "../MoviesList/MoviesList";
 import {GenreBadge} from "../GenreBadge/GenreBadge";
 import {Header} from "../Header/Header";
 
-
-
-
-
 const MoviesListCard = () => {
 
     const {show,movies, loading, currentGenres, page} = useSelector(state => state.movieReducer);
@@ -34,7 +30,6 @@ const MoviesListCard = () => {
             {
                 show ? <GenreBadge/> : null
             }
-
             <Pagination/>
             <div>
                 {
