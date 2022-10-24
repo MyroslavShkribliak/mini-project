@@ -10,18 +10,17 @@ const MovieInfo = ({next}) => {
     const {genres} = useSelector(state => state.movieReducer);
 
     const Genre = (id) => {
-        const genre = genres?.genres?.find(value => value.id === id)
+        const genre = genres?.genres?.findIndex(value => value.id === id)
         return genre?.name;
     }
 
     return (
         <div>
                 <div>
-
                     <div>
-                        <img src={photosImages + next.poster_path} alt={next.title}/>
+                        <img src={`${photosImages}${next.poster_path}`} alt={`${next.title}`}/>
                     </div>
-                    <div className={'movie-container_content'}>
+                    <div>
                         <h2>{next?.original_title}</h2>
 
                         <div>
@@ -30,15 +29,13 @@ const MovieInfo = ({next}) => {
                                 next?.genres?.map(genre => <span key={genre.id}> {Genre(genre.id)}</span>)
                             }
                         </div>
-                        <div><p>Released:<span>{next?.release_date}</span></p></div>
-                        <div><p>Rating: <span>{next?.vote_average}</span></p></div>
-                        <div><p>Runtime: <span>{next?.runtime}</span></p></div>
-                        <div><p>Overview: <span>{next?.overview}</span></p></div>
+                        <div>Released:{next?.release_date}</div>
+                        <div>Rating:{next?.vote_average}</div>
+                        <div>Runtime:{next?.runtime}</div>
+                        <div>Overview:{next?.overview}</div>
                     </div>
 
                 </div>
-
-
 
         </div>
     );
