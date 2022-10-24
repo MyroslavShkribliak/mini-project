@@ -1,11 +1,9 @@
-import React, {useEffect} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 
-import {movieActions} from "../../redux";
 import {photosImages} from "../../configs";
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect} from "react";
+import {movieActions} from "../../redux";
 
 const MovieInfo = () => {
 
@@ -21,7 +19,7 @@ const MovieInfo = () => {
 
     useEffect(() => {
         if (id) dispatch(movieActions.getMovie(id))
-    }, [dispatch, id])
+    }, [id])
 
     const findGenre = (id) => {
         const genre = genres?.genres?.find(value => value.id === id)
@@ -31,33 +29,32 @@ const MovieInfo = () => {
     return (
         <div>
 
-            <FontAwesomeIcon icon={faArrowLeft} onClick={() => navigate(-1)}/>
-
             {movie ?
-                <div>
+                <div className={'movie-wrapper'}>
 
                     <div>
                         <img src={photosImages + movie?.poster_path} alt={movie?.title}/>
                     </div>
-                    <div>
+                    <div className={'movie-container_content'}>
                         <h2>{movie?.original_title}</h2>
 
                         <div>
                             <span>Genre: </span>
                             {
-                                movie.genres?.map(genre => <span key={genre.id}> {findGenre(genre.id)}</span>)
+                                movie?.genres?.map(genre => <span key={genre.id}> {findGenre(genre.id)}</span>)
                             }
                         </div>
-                        <div><p>Released{movie?.release_date}</p></div>
-                        <div><p>Rating:{movie?.vote_average}</p></div>
-                        <div><p>Runtime:{movie?.runtime}</p></div>
-                        <div><p>Overview:{movie?.overview}</p></div>
+                        <div><p>Released:<span>{movie?.release_date}</span></p></div>
+                        <div><p>Rating: <span>{movie?.vote_average}</span></p></div>
+                        <div><p>Runtime: <span>{movie?.runtime}</span></p></div>
+                        <div><p>Overview: <span>{movie?.overview}</span></p></div>
                     </div>
 
                 </div>
                 :
-                <h2>No info</h2>
+                <h2 className={"no_info"}>No info</h2>
             }
+
 
 
         </div>

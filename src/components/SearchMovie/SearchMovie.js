@@ -1,24 +1,20 @@
-import React, {useState} from 'react';
-
 import {useDispatch} from "react-redux";
 import {movieActions} from "../../redux";
+import {useEffect, useState} from "react";
 
-const Search = () => {
-
+const SearchMovie = () => {
     const [query, setQuery] = useState('');
 
     const dispatch = useDispatch();
 
-    const searchMovies = (e) => {
-        e.preventDefault()
+    useEffect(()=>{
         if (query) {
             dispatch(movieActions.searchMovie(query))
-        } else dispatch(movieActions.getMovie)
-    }
+        }
+    },[dispatch,query])
 
     const clear = (e) => {
         e.preventDefault()
-
         if (query) {
             dispatch(movieActions.searchMovie(query))
         }
@@ -26,9 +22,9 @@ const Search = () => {
     }
 
     return (
-        <form onChange={searchMovies}>
+        <form>
             <input type="text"
-                   placeholder={"Search..."}
+                   placeholder={"Пошук..."}
                    onChange={(e) => setQuery(e.target.value)}
                    value={query}
             />
@@ -37,4 +33,4 @@ const Search = () => {
     );
 };
 
-export {Search};
+export {SearchMovie};

@@ -10,9 +10,9 @@ const Pagination = () => {
 
     return (
         <div className={"pag-wrap"}>
-            <button className={"pag-btn"} onClick={()=> dispatch(movieActions.prevPage(1))}>Previous page</button>
-            <span>Current page: {page}</span>
-            <button className={"pag-btn"} onClick={()=> dispatch(movieActions.nextPage(1))}>Next page</button>
+            <button className={"pag-btn"} onClick={()=> dispatch(movieActions.prevPage(1))}>Попередня сторінка</button>
+            <span>Сторінка {page}</span>
+            <button className={"pag-btn"} onClick={()=> dispatch(movieActions.nextPage(1))}>Наступна сторінка</button>
         </div>
     );
 };

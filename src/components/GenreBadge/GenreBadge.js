@@ -6,18 +6,16 @@ import {movieActions} from "../../redux";
 
 const GenreBadge = () => {
 
-    const ref = useRef(null);
-
     const {genres} = useSelector(state => state.movieReducer);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(movieActions.getGenrebadge)
+        dispatch(movieActions.getGenrebadge())
     }, [])
 
-    const handleSubmit = (id) => {
-        if (ref.current.checked) {
+    const ByID = (id) => {
+        if (id) {
             dispatch(movieActions.selectGenre(id))
         }else dispatch(movieActions.deleteGenre(id))
     }
@@ -26,14 +24,13 @@ const GenreBadge = () => {
         <div>
             <div>
                 {
-                    genres.genres?.map(genre => <div key={genre.id}>
-                        <label>
+                    genres?.genres?.map(genre => <div key={genre.id}>
+                        <label className={"checkbox-el"}>
                             <input
                                 type="checkbox"
                                 value={genre.name}
                                 name={genre.name}
-                                ref={ref}
-                                onClick={() => handleSubmit(genre.id)}
+                                onClick={() => ByID(genre.id)}
                             />
                             {genre.name}
                         </label>
@@ -42,10 +39,9 @@ const GenreBadge = () => {
 
             </div>
             <div>
-                <button onClick={() => dispatch(movieActions.show(false))}>Ok</button>
+                <button onClick={() => dispatch(movieActions.show(false))}>Згорнути</button>
             </div>
         </div>
     )
-};
-
+}
 export {GenreBadge};

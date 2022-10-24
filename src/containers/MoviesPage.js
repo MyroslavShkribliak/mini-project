@@ -1,4 +1,4 @@
-import {MoviesListCard} from "../components";
+import { MoviesListCard} from "../components";
 import {Outlet} from "react-router-dom";
 
 const MoviesPage = () => {
@@ -6,7 +6,6 @@ const MoviesPage = () => {
         <div>
             <Outlet/>
             <MoviesListCard/>
-
         </div>
     );
 };

@@ -24,18 +24,6 @@ const getAllMovie = createAsyncThunk(
     }
 );
 
-const getMovie = createAsyncThunk(
-    'movieSlice/getMovie',
-    async (id, {rejectWithValue}) => {
-        try {
-            const {data} = await movieService.getMovie(id);
-            return data;
-        } catch (e) {
-            rejectWithValue(e.response.data)
-        }
-    }
-);
-
 const searchMovie = createAsyncThunk(
     'movieSlice/searchMovie',
     async (arg, {rejectWithValue}) => {
@@ -60,11 +48,22 @@ const getGenrebadge = createAsyncThunk(
     }
 );
 
-const searchByGenre = createAsyncThunk(
+const getMovie = createAsyncThunk(
+    'movieSlice/getMovie',
+    async (id, {rejectWithValue}) => {
+        try {
+            const {data} = await movieService.getMovie(id);
+            return data;
+        } catch (e) {
+            rejectWithValue(e.response.data)
+        }
+    }
+);
+const searchGenreBadge = createAsyncThunk(
     'movieSlice/searchByGenre',
     async ({currentGenres}, {rejectWithValue}) => {
         try {
-            const {data} = await movieService.searchByGenre(currentGenres)
+            const {data} = await movieService.searchGenreBadge(currentGenres)
             return data;
         } catch (e) {
             rejectWithValue(e.response.data)
@@ -90,8 +89,8 @@ const movieSlice = createSlice({
             state.currentGenres.push(action.payload);
         },
         deleteGenre: (state, action) => {
-            const index = state.currentGenres.findIndex(genre => genre.id === action.payload);
-            state.currentGenres.splice(index, 1)
+            const index = state.movies.findIndex(movie=>movie.id === action.payload);
+            state.movies.splice(index, 1)
         }
     },
     extraReducers: builder =>
@@ -117,11 +116,11 @@ const movieSlice = createSlice({
                 state.genres = action.payload;
                 state.loading = false;
             })
-            .addCase(searchByGenre.fulfilled, (state, action) => {
+            .addCase(searchGenreBadge.fulfilled, (state, action) => {
                 state.movies = action.payload;
                 state.loading = false;
             })
-            .addCase(searchByGenre.pending, (state) => {
+            .addCase(searchGenreBadge.pending, (state) => {
                 state.loading = true;
             })
 });
@@ -135,10 +134,10 @@ const movieActions = {
     nextPage,
     prevPage,
     show,
-    searchByGenre,
+    searchGenreBadge,
     selectGenre,
-    getMovie,
-    deleteGenre
+    deleteGenre,
+    getMovie
 }
 
 export {

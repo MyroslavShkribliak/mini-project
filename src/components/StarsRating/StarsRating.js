@@ -14,7 +14,6 @@ const StarsRating = ({rating}) => {
                 starSpacing="0.5px"
             />
         </div>
-
     );
 };
 
