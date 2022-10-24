@@ -5,7 +5,7 @@ const urls = {
     movies: '/discover/movie',
     search: '/search/movie',
     genres: '/genre/movie/list',
-    movie: './movie'
+    movie: '/discover/movie'
 };
 
 

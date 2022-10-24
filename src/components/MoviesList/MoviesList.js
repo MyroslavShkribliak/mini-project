@@ -1,17 +1,10 @@
-import {useDispatch} from "react-redux";
-import {useEffect} from "react";
-
-import {StarsRating} from "../StarsRating/StarsRating";
-import {movieActions} from "../../redux";
-import {photosImages} from "../../configs";
-import css from './movie.module.css';
 import {Link} from "react-router-dom";
 
+import {StarsRating} from "../StarsRating/StarsRating";
+import {photosImages} from "../../configs";
+import css from './movie.module.css';
+
 const MoviesList = ({movie}) => {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(movieActions.getAllMovie)
-    }, [])
 
     return (
 

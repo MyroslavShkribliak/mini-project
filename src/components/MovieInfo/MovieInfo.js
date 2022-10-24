@@ -33,7 +33,7 @@ const MovieInfo = () => {
                 <div className={'movie-wrapper'}>
 
                     <div>
-                        <img src={photosImages + movie?.poster_path} alt={movie?.title}/>
+                        <img src={photosImages + movie.poster_path} alt={movie.title}/>
                     </div>
                     <div className={'movie-container_content'}>
                         <h2>{movie?.original_title}</h2>

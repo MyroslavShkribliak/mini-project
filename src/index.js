@@ -11,9 +11,9 @@ const store = setupStore();
 
 root.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
     </Provider>
 );
 
