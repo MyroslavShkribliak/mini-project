@@ -15,6 +15,7 @@ const App = () => {
         theme === "light" ? setTheme("dark") : setTheme("light");
     };
 
+
     return (
         <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
             <GlobalStyles/>
@@ -23,12 +24,13 @@ const App = () => {
                 <Routes>
                     <Route path={'/'} element={<MoviesPage/>}>
                         <Route path={'movie'} element={<MoviesList/>}>
-                            <Route path={':movieId'} element={<MovieInfo/>}/>
+                            <Route path={'movie:Id'} element={<MovieInfo/>}/>
                         </Route>
                     </Route>
                 </Routes>
             </StyledApp>
         </ThemeProvider>
+
     );
 };
 export {App};

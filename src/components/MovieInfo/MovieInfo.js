@@ -1,8 +1,8 @@
 import {useNavigate, useParams} from "react-router-dom";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 import {photosImages} from "../../configs";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
 import {movieActions} from "../../redux";
 
 const MovieInfo = () => {
@@ -21,7 +21,7 @@ const MovieInfo = () => {
         if (id) dispatch(movieActions.getMovie(id))
     }, [id])
 
-    const findGenre = (id) => {
+    const Genre = (id) => {
         const genre = genres?.genres?.find(value => value.id === id)
         return genre?.name;
     }
@@ -39,9 +39,9 @@ const MovieInfo = () => {
                         <h2>{movie?.original_title}</h2>
 
                         <div>
-                            <span>Genre: </span>
+                            <span>Genre </span>
                             {
-                                movie?.genres?.map(genre => <span key={genre.id}> {findGenre(genre.id)}</span>)
+                                movie?.genres?.map(genre => <span key={genre.id}> {Genre(genre.id)}</span>)
                             }
                         </div>
                         <div><p>Released:<span>{movie?.release_date}</span></p></div>
