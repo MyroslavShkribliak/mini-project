@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 import {photosImages} from "../../configs";
 
@@ -7,10 +7,7 @@ import {photosImages} from "../../configs";
 const MovieInfo = ({next}) => {
     const navigate = useNavigate();
 
-    const {movie, genres} = useSelector(state => state.movieReducer);
-
-    const dispatch = useDispatch();
-
+    const {genres} = useSelector(state => state.movieReducer);
 
     const Genre = (id) => {
         const genre = genres?.genres?.find(value => value.id === id)
@@ -19,9 +16,7 @@ const MovieInfo = ({next}) => {
 
     return (
         <div>
-
-
-                <div className={'movie-wrapper'}>
+                <div>
 
                     <div>
                         <img src={photosImages + next.poster_path} alt={next.title}/>

@@ -5,15 +5,16 @@ import {StarsRating} from "../StarsRating/StarsRating";
 import {movieActions} from "../../redux";
 import {photosImages} from "../../configs";
 import css from './movie.module.css';
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {MovieInfo} from "../MovieInfo/MovieInfo";
 
 const MoviesList = ({movie}) => {
     const {next} = useSelector(state => state.movieReducer);
     const dispatch = useDispatch();
+    const {id} = useParams();
     useEffect(() => {
-        dispatch(movieActions.getAllMovie)
-    }, [])
+        dispatch(movieActions.getMovie(id))
+    }, [dispatch,id])
 
     return (
 
@@ -29,7 +30,7 @@ const MoviesList = ({movie}) => {
             </div>
             <div>
                 {
-                    next?.results?.map((next, index) => <MovieInfo key={index} next={next}/>)
+                    next&&<MovieInfo key={next.id} next={next}/>
                 }
             </div>
         </div>

@@ -25,7 +25,6 @@ const MoviesListCard = () => {
 
     return (
         <div>
-
             <Header/>
             {
                 show ? <GenreBadge/> : null
@@ -35,7 +34,7 @@ const MoviesListCard = () => {
                 {
                     loading
                         ?
-                        <div><BarLoader color="#8A2BE2" cssOverride={{}} height={15} width={400}/>
+                        <div><BarLoader color="#8A2BE2" cssOverride={{}} height={3} width={505}/>
                         </div>
                         :
                         movies.results?.map(movie => <MoviesList key={movie.id} movie={movie}/>)
