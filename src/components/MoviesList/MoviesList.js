@@ -6,10 +6,9 @@ import {movieActions} from "../../redux";
 import {photosImages} from "../../configs";
 import css from './movie.module.css';
 import {Link, useParams} from "react-router-dom";
-import {MovieInfo} from "../MovieInfo/MovieInfo";
 
 const MoviesList = ({movie}) => {
-    const {next} = useSelector(state => state.movieReducer);
+    const {info} = useSelector(state => state.movieReducer);
     const dispatch = useDispatch();
     const {id} = useParams();
     useEffect(() => {
@@ -27,11 +26,6 @@ const MoviesList = ({movie}) => {
             <p>{movie?.overview} </p>
             <div className={css.rating}>
                 <StarsRating rating={movie?.vote_average}/>
-            </div>
-            <div>
-                {
-                    next&&<MovieInfo key={next.id} next={next}/>
-                }
             </div>
         </div>
     );

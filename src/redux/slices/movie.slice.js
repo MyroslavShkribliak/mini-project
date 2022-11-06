@@ -50,7 +50,7 @@ const getGenrebadge = createAsyncThunk(
 
 const getMovie = createAsyncThunk(
     'movieSlice/getMovie',
-    async (id, {rejectWithValue}) => {
+    async ({id}, {rejectWithValue}) => {
         try {
             const {data} = await movieService.getMovie(id);
             return data;

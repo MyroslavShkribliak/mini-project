@@ -10,7 +10,7 @@ import {Header} from "../Header/Header";
 
 const MoviesListCard = () => {
 
-    const {show,movies, loading, currentGenres, page} = useSelector(state => state.movieReducer);
+    const {show, movies, loading, currentGenres, page} = useSelector(state => state.movieReducer);
 
 
     const dispatch = useDispatch();
