@@ -1,45 +1,26 @@
-import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import { useLocation } from 'react-router-dom';
 
-import {photosImages} from "../../configs";
+import { photosImages } from '../../configs';
+import { StarsRating } from '../StarsRating/StarsRating'
 
+const MovieInfo = () => {
+  const location = useLocation();
 
-const MovieInfo = ({next}) => {
-    const navigate = useNavigate();
+  const { state: movie } = location;
 
-    const {genres} = useSelector(state => state.movieReducer);
-
-    const Genre = (id) => {
-        const genre = genres?.genres?.findIndex(value => value.id === id)
-        return genre?.name;
-    }
-
-    return (
-        <div>
-                <div>
-                    <div>
-                        <img src={`${photosImages}${next.poster_path}`} alt={`${next.title}`}/>
-                    </div>
-                    <div>
-                        <h2>{next?.original_title}</h2>
-
-                        <div>
-                            <span>Genre </span>
-                            {
-                                next?.genres?.map(genre => <span key={genre.id}> {Genre(genre.id)}</span>)
-                            }
-                        </div>
-                        <div>Released:{next?.release_date}</div>
-                        <div>Rating:{next?.vote_average}</div>
-                        <div>Runtime:{next?.runtime}</div>
-                        <div>Overview:{next?.overview}</div>
-                    </div>
-
-                </div>
-
-        </div>
-    );
+  return (
+    <div>
+      <div>
+        <img src={`${photosImages}${movie?.poster_path}`} alt={`${movie.title}`}/>
+      </div>
+      <div>
+        <h2>{movie?.original_title}</h2>
+        <div>Released:{movie?.release_date}</div>
+        <StarsRating rating={movie?.vote_average}/>
+        <div>Overview:{movie?.overview}</div>
+      </div>
+    </div>
+  );
 }
 
-
-export {MovieInfo};
+export { MovieInfo };

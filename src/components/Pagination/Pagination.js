@@ -1,20 +1,20 @@
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import {movieActions} from "../../redux";
+import { movieActions } from '../../redux';
 
 const Pagination = () => {
 
-    const {page} = useSelector(state => state.movieReducer);
+  const { page } = useSelector(state => state.movieReducer);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    return (
-        <div className={"pag-wrap"}>
-            <button className={"pag-btn"} onClick={()=> dispatch(movieActions.prevPage(1))}>Попередня сторінка</button>
-            <span>Сторінка {page}</span>
-            <button className={"pag-btn"} onClick={()=> dispatch(movieActions.nextPage(1))}>Наступна сторінка</button>
-        </div>
-    );
+  return (
+    <h5 className={'pag-wrap'}>
+      <button className={'pag-btn'} onClick={() => dispatch(movieActions.prevPage(1))}>Попередня сторінка</button>
+      <span>Сторінка {page}</span>
+      <button className={'pag-btn'} onClick={() => dispatch(movieActions.nextPage(1))}>Наступна сторінка</button>
+    </h5>
+  );
 };
 
-export {Pagination};
+export { Pagination };
