@@ -21,7 +21,7 @@ const App = () => {
         <button onClick={() => ThemeToggler()}>Тема</button>
         <Routes>
           <Route path={'/'} element={<MoviesPage/>}/>
-          <Route path={'movie/:id'} element={<MovieInfo/>}/>
+          <Route path={'/movie/:id'} element={<MovieInfo/>}/>
         </Routes>
       </StyledApp>
     </ThemeProvider>
