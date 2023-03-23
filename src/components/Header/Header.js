@@ -10,10 +10,11 @@ const Header = () => {
   const dispatch = useDispatch();
 
   return (
-      <>
+      <div>
         <SearchMovie/>
+        <hr/>
         <button onClick={() => dispatch(movieActions.show(!show))}>Жанр Фільму</button>
-      </>
+      </div>
   );
 }
 

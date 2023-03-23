@@ -9,11 +9,11 @@ const Pagination = () => {
   const dispatch = useDispatch();
 
   return (
-    <h5 className={'pag-wrap'}>
+    <div className={'pag-wrap'}>
       <button className={'pag-btn'} onClick={() => dispatch(movieActions.prevPage(1))}>Попередня сторінка</button>
-      <span>Сторінка {page}</span>
+      <span> Сторінка {page} </span>
       <button className={'pag-btn'} onClick={() => dispatch(movieActions.nextPage(1))}>Наступна сторінка</button>
-    </h5>
+    </div>
   );
 };
 

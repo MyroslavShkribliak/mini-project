@@ -23,23 +23,22 @@ const MoviesListCard = () => {
   }, [dispatch, page, currentGenres]);
 
   return (
-    <>
-      <Header/>
-      {
-        show ? <GenreBadge/> : null
-      }
-      <Pagination/>
       <>
+        <Header/>
+        {
+          show ?  <GenreBadge/> : null
+        }
+        <hr/>
         {
           loading
             ?
-            <BarLoader color="#8A2BE2" cssOverride={{}} height={3} width={505}/>
+              <BarLoader color="#8A2BE2" cssOverride={{}} height={3} width={505}/>
             :
             movies.results?.map(movie => <MoviesList key={movie.id} movie={movie}/>)
         }
-
+        <hr/>
+        <Pagination/>
       </>
-    </>
   );
 };
 

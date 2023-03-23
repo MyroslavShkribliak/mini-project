@@ -1,5 +1,5 @@
-const baseURL = process.env.MOVIE_API;
-const photosImages = process.env.MOVIE_API;
+const baseURL = 'https://api.themoviedb.org/3';
+const photosImages = 'https://image.tmdb.org/t/p/w500';
 
 const urls = {
   movies: '/discover/movie',

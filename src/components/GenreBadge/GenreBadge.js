@@ -20,7 +20,6 @@ const GenreBadge = () => {
   }
 
   return (
-    <>
       <>
         {
           genres?.genres?.map(genre => <div key={genre.id}>
@@ -37,7 +36,6 @@ const GenreBadge = () => {
         }
         <button onClick={() => dispatch(movieActions.show(false))}>Згорнути</button>
       </>
-    </>
   )
 }
 export { GenreBadge };

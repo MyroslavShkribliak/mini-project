@@ -1,12 +1,13 @@
+import { Outlet } from 'react-router-dom'
+
 import { MoviesListCard } from '../components';
-import { Outlet } from 'react-router-dom';
 
 const MoviesPage = () => {
   return (
-    <>
-      <MoviesListCard/>
+    <div>
       <Outlet/>
-    </>
+      <MoviesListCard/>
+    </div>
   );
 };
 
