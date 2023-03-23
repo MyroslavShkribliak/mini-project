@@ -33,8 +33,7 @@ const MoviesListCard = () => {
         {
           loading
             ?
-            <div><BarLoader color="#8A2BE2" cssOverride={{}} height={3} width={505}/>
-            </div>
+            <BarLoader color="#8A2BE2" cssOverride={{}} height={3} width={505}/>
             :
             movies.results?.map(movie => <MoviesList key={movie.id} movie={movie}/>)
         }
